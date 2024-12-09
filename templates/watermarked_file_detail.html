@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}File Details{% endblock %}
+
+{% block content %}
+<div class="bg-white shadow rounded-lg p-6">
+    <h1 class="text-2xl font-bold mb-6">Watermarked File Details</h1>
+    
+    <div class="space-y-4">
+        <div class="border-b pb-4">
+            <h2 class="text-lg font-semibold mb-2">File Information</h2>
+            <p class="text-gray-600">Created: {{ file.created_at|date:"F j, Y, g:i a" }}</p>
+            <p class="text-gray-600">File Type: {{ file.get_file_type_display }}</p>
+        </div>
+
+        <div class="border-b pb-4">
+            <h2 class="text-lg font-semibold mb-2">Watermark Settings</h2>
+            <p class="text-gray-600">Position X: {{ file.position_x }}</p>
+            <p class="text-gray-600">Position Y: {{ file.position_y }}</p>
+            <p class="text-gray-600">Opacity: {{ file.opacity }}</p>
+            <p class="text-gray-600">Rotation: {{ file.rotation }}°</p>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-lg font-semibold">Download Files</h2>
+            <div class="flex space-x-4">
+                <a href="{{ file.original_file.url }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                    Download Original
+                </a>
+                <a href="{{ file.watermarked_file.url }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Download Watermarked
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Templates{% endblock %}
+
+{% block content %}
+<div class="bg-white shadow rounded-lg p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Watermark Templates</h2>
+        <a href="{% url 'template_create' %}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            Create Template
+        </a>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for template in templates %}
+        <div class="border rounded-lg p-4">
+            <h3 class="font-bold">{{ template.name }}</h3>
+            <p class="text-gray-600">Type: {{ template.get_type_display }}</p>
+            {% if template.type == 'TEXT' %}
+                <p class="mt-2">{{ template.text }}</p>
+            {% else %}
+                <img src="{{ template.image.url }}" alt="{{ template.name }}" class="mt-2 max-h-32">
+            {% endif %}
+        </div>
+        {% empty %}
+        <p class="text-gray-500">No templates found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
